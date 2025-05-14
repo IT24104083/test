@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
 
             if (users.contains(newUser)) {
                 request.setAttribute("error", "Email already registered!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
                 return;
             }
 
@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
             request.setAttribute("error", "Registration failed. Please try again.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 }

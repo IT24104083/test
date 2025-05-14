@@ -30,7 +30,7 @@ public class DeleteAccountServlet extends HttpServlet {
 
             FileHandler.updateUsers(users);
             session.invalidate(); // Logout user
-            response.sendRedirect("emplogin.jsp");
+            response.sendRedirect("login.jsp");
 
         } catch (IOException e) {
             e.printStackTrace();

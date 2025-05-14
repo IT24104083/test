@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileHandler {
-    private static final String USERS_FILE = "C:\\Users\\thami\\OneDrive\\Desktop\\final-OOP-project\\project\\src\\main\\webapp\\data\\customers.txt";
+    private static final String USERS_FILE = "C:\\Users\\thami\\OneDrive\\Desktop\\final_OOP_project\\final_pj\\src\\main\\webapp\\data\\customers.txt";
 
     // Generate a unique customer ID
     private static synchronized int generateCustomerId() throws IOException {
