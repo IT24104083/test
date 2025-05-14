@@ -52,12 +52,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .logout-btn, .home-btn {
+        .logout-btn {
             background-color: var(--primary-color);
             color: white;
             border: none;
@@ -69,7 +64,7 @@
             transition: background-color 0.3s;
         }
 
-        .logout-btn:hover, .home-btn:hover {
+        .logout-btn:hover {
             background-color: var(--secondary-color);
         }
 
@@ -254,6 +249,7 @@
             background-color: #c0392b;
         }
 
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -359,10 +355,7 @@
             <h1>Welcome, ${user.name}!</h1>
             <p>Manage your salon booking account</p>
         </div>
-        <div class="header-actions">
-            <a href="landingPage.jsp" class="home-btn">Back to Home</a>
-            <a href="LogoutServlet" class="logout-btn">Logout</a>
-        </div>
+        <a href="LogoutServlet" class="logout-btn">Logout</a>
     </header>
 
     <div class="account-section">
@@ -464,7 +457,7 @@
 <!-- Update Email Modal -->
 <div id="emailModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('emailModal')">×</span>
+        <span class="close-btn" onclick="closeModal('emailModal')">&times;</span>
         <h3 class="modal-title">Update Email Address</h3>
         <form action="UpdateEmailServlet" method="post">
             <div class="form-group">
@@ -483,7 +476,7 @@
 <!-- Update Password Modal -->
 <div id="passwordModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('passwordModal')">×</span>
+        <span class="close-btn" onclick="closeModal('passwordModal')">&times;</span>
         <h3 class="modal-title">Change Password</h3>
         <form action="UpdatePasswordServlet" method="post" onsubmit="return validatePasswordChange()">
             <div class="form-group">
@@ -507,7 +500,7 @@
 <!-- Delete Account Modal -->
 <div id="deleteModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('deleteModal')">×</span>
+        <span class="close-btn" onclick="closeModal('deleteModal')">&times;</span>
         <h3 class="modal-title">Delete Account</h3>
         <p>Are you sure you want to delete your account? This action cannot be undone. All your data will be permanently removed.</p>
         <form action="DeleteAccountServlet" method="post">
@@ -525,7 +518,7 @@
 <!-- Submit Feedback Modal -->
 <div id="feedbackModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('feedbackModal')">×</span>
+        <span class="close-btn" onclick="closeModal('feedbackModal')">&times;</span>
         <h3 class="modal-title">Submit Feedback</h3>
         <form action="FeedbackServlet" method="post">
             <input type="hidden" name="action" value="create">
@@ -543,7 +536,7 @@
 <!-- Edit Feedback Modal -->
 <div id="editFeedbackModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('editFeedbackModal')">×</span>
+        <span class="close-btn" onclick="closeModal('editFeedbackModal')">&times;</span>
         <h3 class="modal-title">Edit Feedback</h3>
         <form action="FeedbackServlet" method="post">
             <input type="hidden" name="action" value="update">
@@ -560,6 +553,7 @@
 </div>
 
 <script>
+    // Modal functions
     function openModal(modalId) {
         document.getElementById(modalId).style.display = 'block';
     }
@@ -569,12 +563,14 @@
         document.getElementById('passwordError').textContent = '';
     }
 
+    // Open edit feedback modal with pre-filled data
     function openEditFeedbackModal(feedbackId, feedbackText) {
         document.getElementById('editFeedbackId').value = feedbackId;
         document.getElementById('editFeedbackText').value = feedbackText;
         openModal('editFeedbackModal');
     }
 
+    // Close modal when clicking outside
     window.onclick = function(event) {
         if (event.target.className === 'modal') {
             document.querySelectorAll('.modal').forEach(modal => {
@@ -583,6 +579,7 @@
         }
     }
 
+    // Password validation
     function validatePasswordChange() {
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
