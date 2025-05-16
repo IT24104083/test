@@ -55,7 +55,7 @@
       gap: 1rem;
     }
 
-    .logout-btn, .home-btn {
+    .logout-btn, .home-btn, .services-btn {
       background-color: var(--primary-color);
       color: white;
       border: none;
@@ -67,7 +67,7 @@
       transition: background-color 0.3s;
     }
 
-    .logout-btn:hover, .home-btn:hover {
+    .logout-btn:hover, .home-btn:hover, .services-btn:hover {
       background-color: var(--secondary-color);
     }
 
@@ -174,6 +174,7 @@
     </div>
     <div class="header-actions">
       <a href="landingPage.jsp" class="home-btn">Home</a>
+      <a href="services.jsp" class="services-btn">Services</a>
       <a href="EmployeeLogoutServlet" class="logout-btn">Logout</a>
     </div>
   </header>
