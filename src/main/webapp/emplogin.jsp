@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-  <title>Salon Booking - Register</title>
+  <title>Employee Login - Salon Booking System</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -26,10 +27,6 @@
       background-attachment: fixed;
       color: var(--text-color);
       line-height: 1.6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       position: relative;
     }
     body::before {
@@ -43,95 +40,95 @@
       z-index: -1;
     }
     .container {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .login-card {
       background-color: white;
-      padding: 30px;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
-      width: 350px;
+      padding: 2rem;
     }
-    h2 {
+    h1 {
       font-family: 'Playfair Display', serif;
-      text-align: center;
       color: var(--primary-color);
-      margin-bottom: 20px;
+      margin-bottom: 1.5rem;
+      text-align: center;
       font-size: 28px;
     }
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 1.5rem;
     }
-    label {
+    .form-group label {
       font-family: 'Lora', serif;
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 0.5rem;
       font-weight: 500;
-      color: var(--text-color);
       font-size: 14px;
     }
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
+    .form-group input {
       width: 100%;
-      padding: 10px;
+      padding: 0.75rem;
       border: 1px solid #ddd;
       border-radius: var(--border-radius);
       font-family: 'Lora', serif;
       font-size: 1rem;
       background-color: #fafafa;
     }
-    input[type="text"]:focus,
-    input[type="email"]:focus,
-    input[type="password"]:focus {
+    .form-group input:focus {
       border-color: var(--primary-color);
       outline: none;
       box-shadow: 0 0 5px rgba(106, 90, 205, 0.3);
     }
-    button {
+    .submit-btn {
       background-color: var(--success-color);
       color: white;
-      padding: 10px 15px;
       border: none;
+      padding: 0.75rem 1.5rem;
       border-radius: var(--border-radius);
       cursor: pointer;
-      width: 100%;
       font-family: 'Lora', serif;
-      font-size: 16px;
       font-weight: 500;
+      font-size: 16px;
+      width: 100%;
       transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
       box-shadow: var(--box-shadow);
     }
-    button:hover {
+    .submit-btn:hover {
       background-color: #27ae60;
       transform: scale(1.05);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
-    .error {
+    .error-message {
       font-family: 'Lora', serif;
       color: var(--danger-color);
-      font-size: 14px;
-      margin-top: 5px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
       background-color: #fee2e2;
-      padding: 0.5rem;
+      padding: 0.75rem;
       border-radius: var(--border-radius);
     }
-    .login-link {
+    .register-link {
       font-family: 'Lora', serif;
       text-align: center;
-      margin-top: 15px;
+      margin-top: 1rem;
       font-size: 14px;
     }
-    .login-link a {
+    .register-link a {
       color: var(--primary-color);
       text-decoration: none;
     }
-    .login-link a:hover {
+    .register-link a:hover {
       text-decoration: underline;
     }
     @media (max-width: 768px) {
       .container {
-        width: 90%;
-        padding: 20px;
+        margin: 1rem auto;
+        padding: 0 0.5rem;
       }
-      h2 {
+      h1 {
         font-size: 24px;
       }
     }
@@ -139,55 +136,28 @@
 </head>
 <body>
 <div class="container">
-  <h2>Register for Salon Booking</h2>
-  <form id="registerForm" action="RegisterServlet" method="post" onsubmit="return validateForm()">
-    <div class="form-group">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <div class="form-group">
-      <label for="confirmPassword">Confirm Password</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" required>
-      <div id="passwordError" class="error">
-        <% if(request.getAttribute("error") != null) { %>
-        <%= request.getAttribute("error") %>
-        <% } %>
+  <div class="login-card">
+    <h1>Employee Login</h1>
+    <form action="EmployeeLoginServlet" method="post">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
       </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit" class="submit-btn">Login</button>
+    </form>
+    <div class="register-link">
+      <p>Don't have an account? <a href="employeeRegister.jsp">Register here</a></p>
     </div>
-    <button type="submit">Register</button>
-  </form>
-  <div class="login-link">
-    Already have an account? <a href="login.jsp">Login here</a>
+    <% if (request.getAttribute("error") != null) { %>
+    <div class="error-message">
+      <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
   </div>
 </div>
-
-<script>
-  function validateForm() {
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const errorElement = document.getElementById('passwordError');
-
-    if (password !== confirmPassword) {
-      errorElement.textContent = "Passwords do not match!";
-      return false;
-    }
-
-    if (password.length < 6) {
-      errorElement.textContent = "Password must be at least 6 characters!";
-      return false;
-    }
-
-    errorElement.textContent = "";
-    return true;
-  }
-</script>
 </body>
 </html>

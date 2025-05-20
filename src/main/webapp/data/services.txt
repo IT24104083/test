@@ -1,0 +1,5 @@
+3,Nail polishing,Premium,100.0,20
+4,Haircut,Regular,20.0
+5,ladies hair cutting,Premium,100.0,20
+6,okopgkog,Regular,56.0
+7,message,Premium,75.0,60

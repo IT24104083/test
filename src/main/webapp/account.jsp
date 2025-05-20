@@ -1,33 +1,47 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.Objects" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%-- Ensure jakarta.servlet.jsp.jstl-api-2.0.0.jar and jakarta.servlet.jsp.jstl-2.0.0.jar are in WEB-INF/lib or included via Maven --%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <title>My Account - Salon Booking System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #6a5acd;
-            --secondary-color: #9370db;
+            --primary-color: #6a5acd; /* Deep purple */
+            --secondary-color: #9370db; /* Lighter purple */
+            --accent-color: #d4af37; /* Soft gold */
             --danger-color: #e74c3c;
             --success-color: #2ecc71;
-            --text-color: #333;
-            --light-gray: #f5f5f5;
+            --text-color: #2e2e2e; /* Darker gray */
+            --light-gray: #f8f1e9; /* Creamy white */
             --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            --gradient-bg: linear-gradient(135deg, #6a5acd, #9370db);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Lora', serif;
         }
 
         body {
-            background-color: var(--light-gray);
+            background: url('images/salon-bg.jpeg') no-repeat center center/cover;
+            background-attachment: fixed;
             color: var(--text-color);
             line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 245, 238, 0.9); /* Warmer creamy overlay */
+            z-index: -1;
         }
 
         .container {
@@ -37,7 +51,7 @@
         }
 
         header {
-            background-color: white;
+            background: var(--gradient-bg);
             padding: 1.5rem;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
@@ -45,27 +59,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: white;
         }
 
         .welcome-message h1 {
-            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+            color: white;
             margin-bottom: 0.5rem;
+            font-size: 32px;
         }
 
-        .logout-btn {
-            background-color: var(--primary-color);
+        .welcome-message p {
+            font-family: 'Lora', serif;
+            font-size: 16px;
+        }
+
+        .logout-btn, .create-booking-btn, .home-btn {
+            background-color: var(--accent-color);
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: var(--border-radius);
             cursor: pointer;
             text-decoration: none;
+            font-family: 'Lora', serif;
             font-weight: 500;
-            transition: background-color 0.3s;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            margin-left: 0.5rem;
+            box-shadow: var(--box-shadow);
         }
 
-        .logout-btn:hover {
+        .logout-btn:hover, .create-booking-btn:hover, .home-btn:hover {
             background-color: var(--secondary-color);
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .account-section {
@@ -78,7 +106,7 @@
             background-color: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 1.5rem;
+            padding: 2rem;
             height: fit-content;
         }
 
@@ -97,18 +125,23 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
             margin-right: 1rem;
             font-weight: bold;
         }
 
         .profile-info h2 {
+            font-family: 'Playfair Display', serif;
             color: var(--primary-color);
             margin-bottom: 0.25rem;
+            font-size: 24px;
         }
 
         .profile-info p {
+            font-family: 'Lora', serif;
             color: #666;
+            font-size: 14px;
         }
 
         .account-details {
@@ -128,13 +161,16 @@
         }
 
         .detail-label {
+            font-family: 'Lora', serif;
             font-weight: 600;
             color: #666;
             margin-bottom: 0.25rem;
             display: block;
+            font-size: 14px;
         }
 
         .detail-value {
+            font-family: 'Lora', serif;
             font-size: 1.1rem;
         }
 
@@ -142,14 +178,16 @@
             background-color: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .section-title {
+            font-family: 'Playfair Display', serif;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--light-gray);
+            font-size: 28px;
         }
 
         .action-btn {
@@ -159,11 +197,14 @@
             margin-bottom: 1rem;
             border: none;
             border-radius: var(--border-radius);
+            font-family: 'Lora', serif;
             font-weight: 500;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
             text-align: center;
             text-decoration: none;
+            box-shadow: var(--box-shadow);
         }
 
         .update-email {
@@ -173,6 +214,8 @@
 
         .update-email:hover {
             background-color: var(--secondary-color);
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .update-password {
@@ -182,6 +225,8 @@
 
         .update-password:hover {
             background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .delete-account {
@@ -191,65 +236,93 @@
 
         .delete-account:hover {
             background-color: #c0392b;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .submit-feedback {
-            background-color: #f1c40f;
+            background-color: var(--accent-color);
             color: white;
         }
 
         .submit-feedback:hover {
-            background-color: #d4ac0d;
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .feedback-table {
+        .create-booking {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .create-booking:hover {
+            background-color: #27ae60;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-table, .booking-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 1rem;
+            background-color: white;
         }
 
-        .feedback-table th, .feedback-table td {
-            padding: 0.75rem;
+        .feedback-table th, .feedback-table td, .booking-table th, .booking-table td {
+            padding: 1rem;
             border-bottom: 1px solid #eee;
             text-align: left;
+            font-family: 'Lora', serif;
         }
 
-        .feedback-table th {
+        .feedback-table th, .booking-table th {
             background-color: var(--light-gray);
             color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
         }
 
-        .feedback-actions {
+        .feedback-table tr:nth-child(even), .booking-table tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .feedback-actions, .booking-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
-        .edit-feedback {
+        .edit-feedback, .edit-booking {
             background-color: #3498db;
             color: white;
             padding: 0.5rem 1rem;
             border-radius: var(--border-radius);
             text-decoration: none;
+            font-family: 'Lora', serif;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        .edit-feedback:hover {
+        .edit-feedback:hover, .edit-booking:hover {
             background-color: #2980b9;
+            transform: scale(1.05);
         }
 
-        .delete-feedback {
+        .delete-feedback, .delete-booking {
             background-color: var(--danger-color);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: var(--border-radius);
             border: none;
             cursor: pointer;
+            font-family: 'Lora', serif;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        .delete-feedback:hover {
+        .delete-feedback:hover, .delete-booking:hover {
             background-color: #c0392b;
+            transform: scale(1.05);
         }
 
-        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -258,7 +331,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             overflow: auto;
         }
 
@@ -269,7 +342,7 @@
             border-radius: var(--border-radius);
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             position: relative;
         }
 
@@ -279,16 +352,19 @@
             right: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #999;
+            color: #666;
+            transition: color 0.3s;
         }
 
         .close-btn:hover {
-            color: #666;
+            color: var(--primary-color);
         }
 
         .modal-title {
+            font-family: 'Playfair Display', serif;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
+            font-size: 24px;
         }
 
         .form-group {
@@ -296,9 +372,11 @@
         }
 
         .form-group label {
+            font-family: 'Lora', serif;
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            font-size: 14px;
         }
 
         .form-group input, .form-group textarea {
@@ -306,7 +384,15 @@
             padding: 0.75rem;
             border: 1px solid #ddd;
             border-radius: var(--border-radius);
+            font-family: 'Lora', serif;
             font-size: 1rem;
+            background-color: #fafafa;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(106, 90, 205, 0.3);
         }
 
         .submit-btn {
@@ -316,24 +402,44 @@
             padding: 0.75rem 1.5rem;
             border-radius: var(--border-radius);
             cursor: pointer;
+            font-family: 'Lora', serif;
             font-weight: 500;
-            transition: background-color 0.3s;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: var(--box-shadow);
         }
 
         .submit-btn:hover {
             background-color: #27ae60;
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .error-message {
+            font-family: 'Lora', serif;
             color: var(--danger-color);
             margin-top: 1rem;
             font-size: 0.9rem;
+            background-color: #fee2e2;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
         }
 
         .success-message {
+            font-family: 'Lora', serif;
             color: var(--success-color);
             margin-top: 1rem;
             font-size: 0.9rem;
+            background-color: #d1fae5;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+        }
+
+        .no-feedback-message, .no-bookings-message {
+            font-family: 'Lora', serif;
+            color: #666;
+            font-size: 16px;
+            margin-top: 1rem;
         }
 
         @media (max-width: 768px) {
@@ -345,6 +451,14 @@
                 margin: 20% auto;
                 width: 95%;
             }
+
+            .welcome-message h1 {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -355,7 +469,11 @@
             <h1>Welcome, ${user.name}!</h1>
             <p>Manage your salon booking account</p>
         </div>
-        <a href="LogoutServlet" class="logout-btn">Logout</a>
+        <div>
+            <a href="landingPage.jsp" class="home-btn">Home</a>
+            <a href="${pageContext.request.contextPath}/bookings/create" class="create-booking-btn">Create Booking</a>
+            <a href="LogoutServlet" class="logout-btn">Logout</a>
+        </div>
     </header>
 
     <div class="account-section">
@@ -422,10 +540,10 @@
                         <tbody>
                         <c:forEach var="feedback" items="${userFeedbacks}">
                             <tr>
-                                <td>${feedback.feedbackId}</td>
-                                <td>${feedback.feedback}</td>
+                                <td><c:out value="${feedback.feedbackId}"/></td>
+                                <td><c:out value="${feedback.feedback}"/></td>
                                 <td class="feedback-actions">
-                                    <a href="#" class="edit-feedback" onclick="openEditFeedbackModal(${feedback.feedbackId}, '${feedback.feedback.replace("'", "\\'")}')">Edit</a>
+                                    <a href="#" class="edit-feedback" onclick="openEditFeedbackModal(${feedback.feedbackId}, '<c:out value="${feedback.feedback}" escapeXml="true"/>')">Edit</a>
                                     <form action="FeedbackServlet" method="post" style="display:inline;">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="feedbackId" value="${feedback.feedbackId}">
@@ -439,17 +557,72 @@
                 </c:otherwise>
             </c:choose>
 
-            <% if (request.getAttribute("success") != null) { %>
-            <div class="success-message">
-                <%= request.getAttribute("success") %>
-            </div>
-            <% } %>
+            <h3 class="section-title">My Bookings</h3>
+            <c:choose>
+                <c:when test="${empty bookings}">
+                    <p class="no-bookings-message">No bookings yet.</p>
+                </c:when>
+                <c:otherwise>
+                    <table class="booking-table">
+                        <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Services</th>
+                            <th>Total Price</th>
+                            <th>Employee</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="booking" items="${bookings}">
+                            <tr>
+                                <td>${booking.bookingId}</td>
+                                <td>${booking.date}</td>
+                                <td>${booking.time}</td>
+                                <td>
+                                    <c:forEach var="serviceId" items="${booking.serviceIds}">
+                                        <c:forEach var="service" items="${services}">
+                                            <c:if test="${service.serviceId == serviceId}">
+                                                ${service.serviceName}<br>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:forEach>
+                                </td>
+                                <td>$${booking.totalPrice}</td>
+                                <td>
+                                    <c:forEach var="employee" items="${employees}">
+                                        <c:if test="${employee.employeeId == booking.employeeId}">
+                                            ${employee.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td class="booking-actions">
+                                    <a href="${pageContext.request.contextPath}/bookings/edit?bookingId=${booking.bookingId}" class="edit-booking">Edit</a>
+                                    <form action="${pageContext.request.contextPath}/bookings/delete" method="post" style="display:inline;">
+                                        <input type="hidden" name="bookingId" value="${booking.bookingId}">
+                                        <button type="submit" class="delete-booking" onclick="return confirm('Are you sure you want to delete this booking?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </c:otherwise>
+            </c:choose>
 
-            <% if (request.getAttribute("error") != null) { %>
-            <div class="error-message">
-                <%= request.getAttribute("error") %>
-            </div>
-            <% } %>
+            <c:if test="${not empty success}">
+                <div class="success-message">
+                    <c:out value="${success}"/>
+                </div>
+            </c:if>
+
+            <c:if test="${not empty error}">
+                <div class="error-message">
+                    <c:out value="${error}"/>
+                </div>
+            </c:if>
         </div>
     </div>
 </div>
@@ -457,7 +630,7 @@
 <!-- Update Email Modal -->
 <div id="emailModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('emailModal')">&times;</span>
+        <span class="close-btn" onclick="closeModal('emailModal')">×</span>
         <h3 class="modal-title">Update Email Address</h3>
         <form action="UpdateEmailServlet" method="post">
             <div class="form-group">
@@ -476,7 +649,7 @@
 <!-- Update Password Modal -->
 <div id="passwordModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('passwordModal')">&times;</span>
+        <span class="close-btn" onclick="closeModal('passwordModal')">×</span>
         <h3 class="modal-title">Change Password</h3>
         <form action="UpdatePasswordServlet" method="post" onsubmit="return validatePasswordChange()">
             <div class="form-group">
@@ -500,7 +673,7 @@
 <!-- Delete Account Modal -->
 <div id="deleteModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('deleteModal')">&times;</span>
+        <span class="close-btn" onclick="closeModal('deleteModal')">×</span>
         <h3 class="modal-title">Delete Account</h3>
         <p>Are you sure you want to delete your account? This action cannot be undone. All your data will be permanently removed.</p>
         <form action="DeleteAccountServlet" method="post">
@@ -518,7 +691,7 @@
 <!-- Submit Feedback Modal -->
 <div id="feedbackModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('feedbackModal')">&times;</span>
+        <span class="close-btn" onclick="closeModal('feedbackModal')">×</span>
         <h3 class="modal-title">Submit Feedback</h3>
         <form action="FeedbackServlet" method="post">
             <input type="hidden" name="action" value="create">
@@ -536,7 +709,7 @@
 <!-- Edit Feedback Modal -->
 <div id="editFeedbackModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('editFeedbackModal')">&times;</span>
+        <span class="close-btn" onclick="closeModal('editFeedbackModal')">×</span>
         <h3 class="modal-title">Edit Feedback</h3>
         <form action="FeedbackServlet" method="post">
             <input type="hidden" name="action" value="update">
@@ -553,7 +726,6 @@
 </div>
 
 <script>
-    // Modal functions
     function openModal(modalId) {
         document.getElementById(modalId).style.display = 'block';
     }
@@ -563,14 +735,12 @@
         document.getElementById('passwordError').textContent = '';
     }
 
-    // Open edit feedback modal with pre-filled data
     function openEditFeedbackModal(feedbackId, feedbackText) {
         document.getElementById('editFeedbackId').value = feedbackId;
-        document.getElementById('editFeedbackText').value = feedbackText;
+        document.getElementById('editFeedbackText').value = feedbackText.replace(/\\'/g, "'").replace(/\\"/g, '"');
         openModal('editFeedbackModal');
     }
 
-    // Close modal when clicking outside
     window.onclick = function(event) {
         if (event.target.className === 'modal') {
             document.querySelectorAll('.modal').forEach(modal => {
@@ -579,7 +749,6 @@
         }
     }
 
-    // Password validation
     function validatePasswordChange() {
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;

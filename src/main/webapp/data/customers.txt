@@ -1,1 +1,5 @@
 customerId:2,name:maleesha,email:maleesha@gmail.com,password:thamidu190
+customerId:3,name:Thamindu Wijesinghe,email:vesterskollo@gmail.com,password:thamidu190
+customerId:4,name:Thamidu,email:123@gmail.com,password:thamidu190
+customerId:5,name:dilum,email:dilum@gmail.com,password:dilum123
+customerId:6,name:nilakshmi,email:nilakshmi@gmail.com,password:shadow123

@@ -15,22 +15,52 @@ public class User {
         this.password = password;
     }
 
-    // Getters and setters
-    public int getCustomerId() { return customerId; }
-    public String getName() { return name; }
-    public String getEmail() { return email; }
-    public String getPassword() { return password; }
 
-    public void setCustomerId(int customerId) { this.customerId = customerId; }
-    public void setEmail(String email) { this.email = email; }
-    public void setPassword(String password) { this.password = password; }
+    public int getCustomerId() {
+        return customerId;
+    }
 
-    // Convert user to file string format
+
+    public String getName() {
+        return name;
+    }
+
+
+    public String getEmail() {
+        return email;
+
+    }
+
+
+    public String getPassword() {
+        return password;
+
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+
+    }
+
+
+    public void setEmail(String email) {
+        this.email = email;
+
+    }
+
+
+    public void setPassword(String password) {
+
+        this.password = password;
+
+    }
+
+
     public String toFileString() {
         return "customerId:" + customerId + ",name:" + name + ",email:" + email + ",password:" + password;
     }
 
-    // Create user from file string
+
     public static User fromFileString(String fileString) {
         String[] parts = fileString.split(",");
         int customerId = Integer.parseInt(parts[0].split(":")[1]);

@@ -1,5 +1,6 @@
 package com.example.servlets;
 
+import com.example.filehandler.CustomerFileHandler;
 import com.example.models.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -18,7 +19,7 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             // Check if user already exists
-            List<User> users = FileHandler.readUsers();
+            List<User> users = CustomerFileHandler.readUsers();
             User newUser = new User(0, name, email, password); // customerId = 0 for auto-generation
 
             if (users.contains(newUser)) {
@@ -28,7 +29,7 @@ public class RegisterServlet extends HttpServlet {
             }
 
             // Save new user
-            FileHandler.saveUser(newUser);
+            CustomerFileHandler.saveUser(newUser);
 
             // Set user in session and redirect to account page
             request.getSession().setAttribute("user", newUser);

@@ -1,5 +1,6 @@
 package com.example.servlets;
 
+import com.example.filehandler.CustomerFileHandler;
 import com.example.models.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -26,7 +27,7 @@ public class UpdateEmailServlet extends HttpServlet {
                 return;
             }
 
-            List<User> users = FileHandler.readUsers();
+            List<User> users = CustomerFileHandler.readUsers();
 
             // Check if new email already exists
             for (User user : users) {
@@ -46,7 +47,7 @@ public class UpdateEmailServlet extends HttpServlet {
                 }
             }
 
-            FileHandler.updateUsers(users);
+            CustomerFileHandler.updateUsers(users);
             session.setAttribute("user", currentUser);
             response.sendRedirect("account.jsp");
 

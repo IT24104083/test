@@ -1,5 +1,6 @@
 package com.example.servlets;
 
+import com.example.filehandler.CustomerFileHandler;
 import com.example.models.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -25,10 +26,10 @@ public class DeleteAccountServlet extends HttpServlet {
                 return;
             }
 
-            List<User> users = FileHandler.readUsers();
+            List<User> users = CustomerFileHandler.readUsers();
             users.removeIf(user -> user.getCustomerId() == currentUser.getCustomerId()); // Use customerId for removal
 
-            FileHandler.updateUsers(users);
+            CustomerFileHandler.updateUsers(users);
             session.invalidate(); // Logout user
             response.sendRedirect("login.jsp");
 

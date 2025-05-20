@@ -1,5 +1,6 @@
 package com.example.servlets;
 
+import com.example.filehandler.CustomerFileHandler;
 import com.example.models.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -16,7 +17,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         try {
-            List<User> users = FileHandler.readUsers();
+            List<User> users = CustomerFileHandler.readUsers();
             for (User user : users) {
                 if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
                     // Successful login
@@ -28,12 +29,12 @@ public class LoginServlet extends HttpServlet {
 
             // Invalid credentials
             request.setAttribute("error", "Invalid email or password");
-            request.getRequestDispatcher("emplogin.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
 
         } catch (IOException e) {
             e.printStackTrace();
             request.setAttribute("error", "Login failed. Please try again.");
-            request.getRequestDispatcher("emplogin.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 }

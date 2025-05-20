@@ -60,7 +60,7 @@
     </div>
     <div class="service">
       <img src="images/book.jpg" alt="Book Now">
-      <h3><a href="bookNow.jsp" class="btn">Book Now</a></h3>
+      <h3><a href="login.jsp" class="btn">Book Now</a></h3>
       <p>Book your appointment today.</p>
     </div>
   </div>
@@ -97,7 +97,7 @@
     </div>
     <div class="footer-column">
       <h3>Feedbacks</h3>
-      <p><a href="FeedbackServlet?action=all">View Customer Feedbacks</a></p>
+      <p><a href="feedbacks.jsp">View Customer Feedbacks</a></p>
     </div>
     <div class="footer-column">
       <h3>Contact Info</h3>
