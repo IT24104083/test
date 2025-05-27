@@ -381,3 +381,4 @@ public class BookingServlet extends HttpServlet {
         request.getRequestDispatcher("/editBooking.jsp").forward(request, response);
     }
 }
+

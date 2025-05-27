@@ -44,7 +44,7 @@
   <h2>Our Services</h2>
   <div class="services-container">
     <div class="service">
-      <img src="images/haircut.jpg" alt="Haircut">
+      <img src="images/hair-cut.jpg" alt="Haircut">
       <h3>Haircut & Styling</h3>
       <p>Trendy haircuts and professional styling.</p>
     </div>
@@ -54,7 +54,7 @@
       <p>Rejuvenating facials for glowing skin.</p>
     </div>
     <div class="service">
-      <img src="images/spa.jpg" alt="Spa">
+      <img src="images/massage.jpg" alt="Spa">
       <h3>Body Spa & Massage</h3>
       <p>Relaxing spa treatments to soothe your body.</p>
     </div>

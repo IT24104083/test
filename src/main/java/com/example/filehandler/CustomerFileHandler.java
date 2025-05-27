@@ -22,7 +22,7 @@ public class CustomerFileHandler {
         return maxId + 1;
     }
 
-    // Save a new user with a generated customerId
+
     public static synchronized void saveUser(User user) throws IOException {
         if (user.getCustomerId() == 0) {
             int newId = generateCustomerId();

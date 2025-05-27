@@ -16,7 +16,7 @@ public class CustomQueue {
         size = 0;
     }
 
-    public synchronized void enqueue(Booking booking) throws IllegalStateException {
+    public  void enqueue(Booking booking) throws IllegalStateException {
         if (isFull()) {
             throw new IllegalStateException("Queue is full. Cannot add more bookings.");
         }
@@ -25,7 +25,7 @@ public class CustomQueue {
         size++;
     }
 
-    public synchronized Booking dequeue() throws IllegalStateException {
+    public  Booking dequeue() throws IllegalStateException {
         if (isEmpty()) {
             throw new IllegalStateException("Queue is empty. No bookings to remove.");
         }
@@ -36,19 +36,19 @@ public class CustomQueue {
         return booking;
     }
 
-    public synchronized boolean isEmpty() {
+    public  boolean isEmpty() {
         return size == 0;
     }
 
-    public synchronized boolean isFull() {
+    public  boolean isFull() {
         return size == CAPACITY;
     }
 
-    public synchronized int size() {
+    public  int size() {
         return size;
     }
 
-    public synchronized Booking[] toArray() {
+    public  Booking[] toArray() {
         Booking[] array = new Booking[size];
         for (int i = 0; i < size; i++) {
             array[i] = queue[(front + i) % CAPACITY];
@@ -56,7 +56,7 @@ public class CustomQueue {
         return array;
     }
 
-    public synchronized void clear() {
+    public  void clear() {
         for (int i = 0; i < size; i++) {
             queue[(front + i) % CAPACITY] = null;
         }
@@ -65,3 +65,4 @@ public class CustomQueue {
         size = 0;
     }
 }
+

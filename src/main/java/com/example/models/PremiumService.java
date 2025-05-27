@@ -8,7 +8,7 @@ public class PremiumService extends Service {
         this.serviceTimeDuration = serviceTimeDuration;
     }
 
-    // Getter and Setter for serviceTimeDuration
+
     public int getServiceTimeDuration() {
         return serviceTimeDuration;
     }

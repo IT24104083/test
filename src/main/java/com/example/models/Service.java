@@ -3,7 +3,7 @@ package com.example.models;
 public abstract class Service {
     private int serviceId;
     private String serviceName;
-    private String serviceType; // "Regular" or "Premium"
+    private String serviceType;
     private double price;
 
     public Service(int serviceId, String serviceName, String serviceType, double price) {
@@ -13,7 +13,7 @@ public abstract class Service {
         this.price = price;
     }
 
-    // Getters and Setters
+
     public int getServiceId() {
         return serviceId;
     }
@@ -46,7 +46,7 @@ public abstract class Service {
         this.price = price;
     }
 
-    // Abstract methods for file handling
+
     public abstract String toFileString();
     public static Service fromFileString(String line) {
         String[] parts = line.split(",");

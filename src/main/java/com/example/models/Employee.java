@@ -7,6 +7,8 @@ public class Employee {
     private String password;
 
     public Employee() {
+
+
     }
 
     public Employee(int employeeId, String name, String email, String password) {
@@ -66,10 +68,10 @@ public class Employee {
         if (data.length == 4) {
             try {
                 return new Employee(
-                        Integer.parseInt(data[0]), // employeeId
-                        unescapeCsv(data[1]),      // name
-                        unescapeCsv(data[2]),      // email
-                        unescapeCsv(data[3])       // password
+                        Integer.parseInt(data[0]),
+                        unescapeCsv(data[1]),
+                        unescapeCsv(data[2]),
+                        unescapeCsv(data[3])
                 );
             } catch (NumberFormatException e) {
                 System.err.println("Error parsing employee line: " + line);

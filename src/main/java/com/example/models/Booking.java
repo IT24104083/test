@@ -17,6 +17,7 @@ public class Booking {
     private double totalPrice;
 
     public Booking() {
+
     }
 
     public Booking(int bookingId, int customerId, int employeeId, String customerName, String employeeName,
@@ -35,28 +36,101 @@ public class Booking {
 
 
 
-    public int getBookingId() { return bookingId; }
-    public void setBookingId(int bookingId) { this.bookingId = bookingId; }
-    public int getCustomerId() { return customerId; }
-    public void setCustomerId(int customerId) { this.customerId = customerId; }
-    public int getEmployeeId() { return employeeId; }
-    public void setEmployeeId(int employeeId) { this.employeeId = employeeId; }
-    public String getCustomerName() { return customerName; }
-    public void setCustomerName(String customerName) { this.customerName = customerName; }
-    public String getEmployeeName() { return employeeName; }
-    public void setEmployeeName(String employeeName) { this.employeeName = employeeName; }
-    public List<Integer> getServiceIds() { return serviceIds; }
-    public void setServiceIds(List<Integer> serviceIds) { this.serviceIds = serviceIds; }
-    public int getScheduleId() { return scheduleId; }
-    public void setScheduleId(int scheduleId) { this.scheduleId = scheduleId; }
-    public String getDate() { return date; }
-    public void setDate(String date) { this.date = date; }
-    public double getTime() { return time; }
-    public void setTime(double time) { this.time = time; }
-    public double getTotalPrice() { return totalPrice; }
-    public void setTotalPrice(double totalPrice) { this.totalPrice = totalPrice; }
+    public int getBookingId() {
 
-    // For account.jsp compatibility
+        return bookingId;
+
+    }
+
+
+    public void setBookingId(int bookingId) {
+
+        this.bookingId = bookingId;
+    }
+
+
+    public int getCustomerId() {
+
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+
+    }
+
+
+    public int getEmployeeId() {
+
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+
+    public void setCustomerName(String customerName) {
+
+        this.customerName = customerName;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public List<Integer> getServiceIds() {
+        return serviceIds;
+    }
+
+    public void setServiceIds(List<Integer> serviceIds) {
+        this.serviceIds = serviceIds;
+
+    }
+
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public double getTime() {
+        return time;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+
+    }
+
+
     public String getServiceIdsAsString() {
         return serviceIds.stream().map(String::valueOf).collect(Collectors.joining(";"));
     }
@@ -77,16 +151,16 @@ public class Booking {
                         .map(Integer::parseInt)
                         .toList();
                 return new Booking(
-                        Integer.parseInt(data[0]),
-                        Integer.parseInt(data[1]),
-                        Integer.parseInt(data[2]),
-                        unescapeCsv(data[3]),
-                        unescapeCsv(data[4]),
-                        serviceIds,
-                        Integer.parseInt(data[6]),
-                        unescapeCsv(data[7]),
-                        Double.parseDouble(data[8]),
-                        Double.parseDouble(data[9])
+                        Integer.parseInt(data[0]), // bookingId
+                        Integer.parseInt(data[1]), // customerId
+                        Integer.parseInt(data[2]), // employeeId
+                        unescapeCsv(data[3]),  // customer name
+                        unescapeCsv(data[4]), // employee name
+                        serviceIds,    // service id
+                        Integer.parseInt(data[6]), //scheduleID
+                        unescapeCsv(data[7]),  // date
+                        Double.parseDouble(data[8]), // time
+                        Double.parseDouble(data[9]) //total
                 );
             } catch (NumberFormatException e) {
                 System.err.println("Error parsing booking line: " + line);

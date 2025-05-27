@@ -119,7 +119,6 @@ public class FeedbackServlet extends HttpServlet {
                 request.setAttribute("error", "Invalid action");
             }
 
-            // Refresh user's feedback
             List<Feedback> userFeedbacks = FeedbackFileHandler.readFeedbacks().stream()
                     .filter(f -> f.getCustomerId() == user.getCustomerId())
                     .collect(Collectors.toList());
